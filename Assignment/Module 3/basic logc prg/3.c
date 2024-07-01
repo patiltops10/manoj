@@ -2,7 +2,7 @@
 #include<stdio.h>
 
 void main(){
- float a,r,c;
+ float a,r,c;8
 
 
  a =3.14 * r * r;
@@ -16,3 +16,4 @@ void main(){
  printf("\ncircumference =%f",c);
  return 0;
 }
+//nok

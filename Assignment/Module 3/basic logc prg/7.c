@@ -13,3 +13,4 @@ int main(){
     printf("The area of the rectangle is:%.2f\n", area);
     return 0;
 }
+//nok
