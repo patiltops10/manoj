@@ -1,0 +1,28 @@
+//There are two types of function in c:
+1] //user-define function
+    - with return_type and with parameters(argument)
+        int sum(int a, int b){
+            int c;
+            c = a + b;
+            return c;                
+
+        }
+    - with return_type and without parameters(argument)
+        int sum(){
+            int a = 10, b = 20, c;
+            c = a + b;
+            return c;
+        }
+    - without return_type and without parameters(argument)
+        void sum(){
+            int a = 10, b = 20, c;
+            c = a + b;
+            printf("%d", c);
+        }
+    - without return_type and with parameters(argument)
+        void sum(int a, int b){
+            int c;
+            c = a + b;
+            printf("%d\n", c);
+        }
+2] Built-In function
