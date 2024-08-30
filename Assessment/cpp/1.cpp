@@ -1,96 +1,155 @@
+// C ++ Programming Assessment Test 
+ 
+// • Create a Project to demonstrate an Event Organiser Project which will help to manage the Events. The Project should contain all the necessary
+//   requirements i.e  need to use conditional Statements, Loops, Function and also A Program should use  the concept of OOP. 
+// • Give comments where it is required , for better understanding of codes. It will help you and the project evaluator. 
+// • A Project should contain the following execution flow. 
+// • When Execution of the main source file, the program should first ask the NAME OF THE EVENT. 
+ 
+// 1. Example : Wedding 
+ 
+// 2. After asking the event name , it should ask your  
+// I. FIRST NAME,LAST NAME. 
+// II. Number of Guests. 
+// III. Number of Minutes. 
+ 
+// 3. Once the all the Input requirement is over, you should be able to get the Event Cost Estimation. 
+// Use the following rate card : 
+// a. const double CostPerHour = 18.50; 
+// b. const double CostPerMinute = .40; 
+// c. const double CostOfDinner = 20.70; 
+ 
+// i). GET Number of Servers. 
+// (1 Server can handle 20 guests, so FIND how much server required for No. of Guests you Entered.) (use ceil() func. rounds up the nearest integer) 
+ 
+// ii). GET COST of ONE Server. 
+// Example :  
+ 
+// Cost1 = (NumberOfMinutes / 60) * CostPerHour; 
+// Cost2 = (NumberOfMinutes % 60) * CostPerMinute; 
+// CostForOneServer = Cost1 + Cost2; 
+ 
+// iii). GET COST for FOOD.  
+// TotalFoodCost = NumberOfGuests * CostOfDinner; 
+ 
+// iv). Get Average Cost Per Person 
+// AverageCost = TotalFoodCost / NumberOfGuests; 
+ 
+// v). GET TOTAL COST. 
+// TotalCost = TotalFoodCost + (CostForOneServer * NumberOfServers); 
+  
+// vi). GET DEPOSIT AMOUNT 
+// DepositAmount = TotalCost * .25; 
+
+
 #include <iostream>
 #include <cmath>
+using namespace std;
 
-// Constants
-const double CostPerHour = 18.50;
-const double CostPerMinute = 0.40;
-const double CostOfDinner = 20.70;
+class Event{
 
-// Function to calculate the number of servers required
-int calculateServers(int numGuests) {
-    return std::ceil(numGuests / 20.0);
-}
+    protected:
+    string event, name;
+    int g_no, minutes;
 
-// Function to calculate the cost of one server
-double calculateServerCost(int numMinutes) {
-    double cost1 = (numMinutes / 60) * CostPerHour;
-    double cost2 = (numMinutes % 60) * CostPerMinute;
-    return cost1 + cost2;
-}
+    public:
+    Event(){
+        cout << "\nEnter the name of event: ";
+        getline(cin, event);
 
-// Function to calculate the total food cost
-double calculateFoodCost(int numGuests) {
-    return numGuests * CostOfDinner;
-}
+        cout << "\nEnter the customer's first and last name: ";
+        getline(cin ,name);
 
-// Function to calculate the average cost per person
-double calculateAverageCost(double totalFoodCost, int numGuests) {
-    return totalFoodCost / numGuests;
-}
+        cout << "\nEnter the number of guests: ";
+        cin >> g_no;
 
-// Function to calculate the total cost
-double calculateTotalCost(double totalFoodCost, double serverCost, int numServers) {
-    return totalFoodCost + (serverCost * numServers);
-}
+        cout << "\nEnter the number of minutes in event: ";
+        cin >> minutes;
+    }
 
-// Function to calculate the deposit amount
-double calculateDepositAmount(double totalCost) {
-    return totalCost * 0.25;
-}
+    string get_name(){
+        return name;
+    }
 
-int main() {
-    // Ask for the event name
-    std::string eventName;
-    std::cout << "Enter the name of the event: ";
-    std::cin >> eventName;
+    void show(){
+        cout << "\nYour Event: " << event << endl;
+        cout << "Event Organizer: " << name << endl;
+    }
+};
 
-    // Ask for the first name and last name
-    std::string firstName, lastName;
-    std::cout << "Enter your first name: ";
-    std::cin >> firstName;
-    std::cout << "Enter your last name: ";
-    std::cin >> lastName;
+class Cost : public Event{
 
-    // Ask for the number of guests
-    int numGuests;
-    std::cout << "Enter the number of guests: ";
-    std::cin >> numGuests;
+    protected: 
 
-    // Ask for the number of minutes
-    int numMinutes;
-    std::cout << "Enter the number of minutes: ";
-    std::cin >> numMinutes;
+    int cost1, cost2;
+    double d_amt;
 
-    // Calculate the number of servers required
-    int numServers = calculateServers(numGuests);
+    const double CostPerHour = 18.50; 
+    const double CostPerMinute = .40; 
+    const double CostOfDinner = 20.70;
 
-    // Calculate the cost of one server
-    double serverCost = calculateServerCost(numMinutes);
+    public:
 
-    // Calculate the total food cost
-    double totalFoodCost = calculateFoodCost(numGuests);
+    double calculate_servent(){
+        
+        return ceil(g_no / 20);
+    }
 
-    // Calculate the average cost per person
-    double averageCost = calculateAverageCost(totalFoodCost, numGuests);
+    double servent_cost(){
 
-    // Calculate the total cost
-    double totalCost = calculateTotalCost(totalFoodCost, serverCost, numServers);
+        cost1 = (minutes / 60) * CostPerHour; 
+        cost2 = (minutes % 60) * CostPerMinute; 
 
-    // Calculate the deposit amount
-    double depositAmount = calculateDepositAmount(totalCost);
+        return ceil(cost1 + cost2);                   // One Servent Cost
+    }
 
-    // Display the results
-    std::cout << "Event Name: " << eventName << std::endl;
-    std::cout << "First Name: " << firstName << std::endl;
-    std::cout << "Last Name: " << lastName << std::endl;
-    std::cout << "Number of Guests: " << numGuests << std::endl;
-    std::cout << "Number of Minutes: " << numMinutes << std::endl;
-    std::cout << "Number of Servers: " << numServers << std::endl;
-    std::cout << "Server Cost: rs" << serverCost << std::endl;
-    std::cout << "Total Food Cost: rs" << totalFoodCost << std::endl;
-    std::cout << "Average Cost per Person: rs" << averageCost << std::endl;
-    std::cout << "Total Cost: rs" << totalCost << std::endl;
-    std::cout << "Deposit Amount: rs" << depositAmount << std::endl;
+    double total_servent_cost(){
+
+        return ceil(servent_cost() * calculate_servent());                    // Total Servent Cost
+    }
+
+    double food_cost(){
+
+        return ceil(g_no * CostOfDinner);
+    }
+
+    double total_cost(){
+
+        return ceil(total_servent_cost() + food_cost());
+    }
+
+    double deposit(){
+
+        return ceil(total_cost() * 0.25);
+    }
+
+    void display(){
+
+        show();
+
+        cout << "\nNumber of required servent is: " << calculate_servent() << endl;
+
+        cout << "\nThe cost of one servent is: " << servent_cost() << endl;
+        cout << "\nThe cost of all servent is: " << total_servent_cost() << endl;
+
+        cout << "\nThe total food cost is: " << food_cost() << endl;
+
+        cout << "\n-> Total Event Cost is: " << total_cost() << endl;
+
+        cout << "\n\nPlease deposit a 25\% deposit to reserve the event." << endl;
+        cout << "\n-> The Deposit Needed is: " << deposit() << endl << endl;
+    }
+};
+
+int main(){
+
+    cout << "\n************************* Event Management System *************************" << endl;
+    
+    Cost c;
+
+    cout << "\n\n************************* Event Estimate for: " << c.get_name() << " *************************" << endl;
+    
+    c.display();
 
     return 0;
-}
+} 
